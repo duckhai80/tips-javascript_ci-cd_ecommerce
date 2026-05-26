@@ -20,8 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Dùng npm install thay vì npm ci để tận dụng node_modules có sẵn, giảm tải I/O cho EC2
-          npm install --include=dev
+          # --no-audit và --no-fund giúp giảm tải việc quét bảo mật liên tục, tiết kiệm đĩa/CPU
+          npm install --include=dev --no-audit --no-fund
 
       - name: Check nodemon version (Optional)
         run: npx nodemon --version || echo "Nodemon is ready"
