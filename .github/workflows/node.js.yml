@@ -11,16 +11,18 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
+        with:
+          # THÀNH PHẦN QUAN TRỌNG: Không xóa các file không thuộc git (như node_modules) khi pull code mới
+          clean: false
 
       - name: Use Node.js 24.x
         uses: actions/setup-node@v4
         with:
           node-version: 24.x
-          # KHÔNG dùng tham số cache: 'npm' ở đây để tránh làm nghẽn ổ đĩa EC2
 
       - name: Install dependencies
         run: |
-          # --no-audit và --no-fund giúp giảm tải việc quét bảo mật liên tục, tiết kiệm đĩa/CPU
+          # Giờ đây lệnh này sẽ chạy siêu nhanh vì cấu trúc node_modules cũ vẫn còn nguyên
           npm install --include=dev --no-audit --no-fund
 
       - name: Check nodemon version (Optional)
